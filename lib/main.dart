@@ -17,13 +17,20 @@ class RandomWordsState extends State<RandomWords> {
   @override
   // ! _ enforces privacy
   final _suggestions = <WordPair>[];
+  final Set<WordPair> _saved = new Set<WordPair>(); // stores the word pairings the user favs
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   Widget _buildRow(WordPair pair) {
+    final bool alreadySaved = _saved.contains(pair); // checking to see if has already been saved to favs
     return ListTile(
       title: Text(
         pair.asPascalCase,
         style: _biggerFont,
+      ),
+      trailing: new Icon(
+        // Added heart icons for faving
+        alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: alreadySaved ? Colors.red :null,
       ),
     );
   }
