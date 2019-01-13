@@ -48,9 +48,49 @@ class RandomWordsState extends State<RandomWords> {
   return Scaffold(
     appBar: AppBar(
       title: Text('Startup Name Generator'),
+      actions: <Widget>[
+        new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved) // added list icon that will navigate to saved page
+      ],
     ),
     body: _buildSuggestions(),
   );
+  }
+
+  void _pushSaved(){
+Navigator.of(context).push( // pushes route to navigator stack
+  new MaterialPageRoute<void>(
+    builder: (BuildContext context) {
+      final Iterable<ListTile> tiles = _saved.map(
+            (WordPair pair) {
+          return new ListTile(
+            title: new Text(
+              pair.asPascalCase,
+              style: _biggerFont,
+            ),
+          );
+        },
+      );
+      final List<Widget> divided = ListTile
+          .divideTiles(
+        context: context,
+        tiles: tiles,
+      )
+          .toList();
+
+      /*
+      The builder property returns a Scaffold, containing the app bar for the new route,
+      named "Saved Suggestions." The body of the new route consists of a ListView containing
+      the ListTiles rows; each row is separated by a divider.
+       */
+      return new Scaffold(
+        appBar: new AppBar(
+          title: const Text('Saved Suggestions'),
+        ),
+        body: new ListView(children: divided),
+      );
+    },
+  ),
+);
   }
 
 // ? This method builds the ListView that displays the suggested word pairing.
