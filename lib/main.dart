@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+import 'package:english_words/english_words.dart'; // ? Leveraged an external, third-party library
 
 void main() => runApp(MyApp());
 
@@ -48,7 +48,7 @@ class RandomWordsState extends State<RandomWords> {
 
           final index = i ~/ 2; /*3*/
           if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+            _suggestions.addAll(generateWordPairs().take(10)); /*4*/ // If you’ve reached the end of the available word pairings, then generate 10 more and add them to the suggestions list.
           }
           return _buildRow(_suggestions[index]);
         });
