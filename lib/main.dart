@@ -7,15 +7,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome to Flutter'),
-        ),
-        body: Center(
-          child: RandomWords(),
-        ),
-      ),
+      title: 'Startup Name Generator',
+      home: RandomWords(),
     );
   }
 }
@@ -45,13 +38,13 @@ class RandomWordsState extends State<RandomWords> {
   );
   }
 
-
+// ? This method builds the ListView that displays the suggested word pairing.
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemBuilder: /*1*/ (context, i) {
           if (i.isOdd)
-            return Divider(); /*2*/
+            return Divider(); /*2*/ // Add a one-pixel-high divider widget before each row in the ListView.
 
           final index = i ~/ 2; /*3*/
           if (index >= _suggestions.length) {
